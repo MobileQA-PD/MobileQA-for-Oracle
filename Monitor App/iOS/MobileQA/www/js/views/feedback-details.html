@@ -1,0 +1,197 @@
+<div class="oj-applayout-content">
+  <div class="oj-applayout-fixed-top">
+
+    <header role="banner" class="oj-hybrid-applayout-header" data-bind="ojModule: headerConfig">
+        
+    </header>
+  </div>      
+     
+  <div role="main" class="oj-hybrid-applayout-content"> 
+      <div id="tabs" data-bind="ojComponent:{component: 'ojTabs'}">
+          <ul>
+            <li><span>Basic</span></li>
+            <li><span>Advanced</span></li>
+          </ul>        
+          <div id="basic">
+              <div class="oj-form-layout">
+                  <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">  
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                              <label data-bind="text: getTranslation('label.appTitle')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: appName"></span>
+                          </div>
+                      </div>
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                              <label data-bind="text: getTranslation('label.appName')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: appId"></span>
+                          </div>
+                      </div>
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                              <label data-bind="text: getTranslation('label.createdOn')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: createdOn"></span>
+                          </div>
+                      </div>                        
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.appVersion')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: appVersion"></span>
+                          </div>
+                      </div>
+                      <!-- <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.priority')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: priority"></span>
+                          </div>
+                      </div>                         -->
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.os')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: osName() + ', ' + os_Version()"></span>
+                          </div>
+                      </div>
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.device')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: deviceManufacturer() + ', ' + deviceModel()" ></span>
+                          </div>
+                      </div>
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.uuid')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: deviceUuid" ></span>
+                          </div>
+                      </div>
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.title')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: title"></span>
+                          </div>
+                      </div>
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.description')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: description" style="word-break: break-all;"></span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div id="advanced">
+              <div class="oj-form-layout">
+                  <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">  
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.id')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: id"></span>
+                          </div>
+                      </div>
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.feedbackId')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: feedbackId"></span>
+                          </div>
+                      </div>
+                      <!-- <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.status')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: status"></span>
+                          </div>
+                      </div> -->
+                      <!-- <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.userId')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: userId"></span>
+                          </div>
+                      </div> -->
+                      <!-- <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.phoneNo')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: phoneNo"></span>
+                          </div>
+                      </div>                         -->
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.type')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: type" ></span>
+                          </div>
+                      </div>
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.rate')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: rate"></span>
+                          </div>
+                      </div>
+                      <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                          <label data-bind="text: getTranslation('label.picture')"></label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <span data-bind="text: picture"></span>
+                        </div>
+                      </div>
+                      <!-- <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.latitude')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: latitude"></span>
+                          </div>
+                      </div>
+                      <div class="oj-flex">  
+                          <div class="oj-flex-item">
+                            <label data-bind="text: getTranslation('label.longitude')"></label>
+                          </div>
+                          <div class="oj-flex-item">
+                              <span data-bind="text: longitude"></span>
+                          </div>
+                      </div> -->
+                      <div class="oj-flex">  
+                        <div class="oj-flex-item">
+                          <label data-bind="text: getTranslation('label.custom')"></label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <textarea data-bind="value: custom" rows="5" style="border: none; width: 100%" readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+              </div>                
+          </div>
+      </div>    
+  </div>
+</div>

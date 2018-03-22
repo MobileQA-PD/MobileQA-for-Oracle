@@ -1,0 +1,140 @@
+<div class="oj-applayout-content">
+    <div class="oj-applayout-fixed-top">
+
+      <header role="banner" class="oj-hybrid-applayout-header" data-bind="ojModule: headerConfig">
+          <h1 class="oj-hybrid-applayout-header-title" data-bind="text: router.currentState().label"></h1>
+      </header>
+    </div>      
+       
+    <div role="main" class="oj-hybrid-applayout-content"> 
+        <div class="oj-form-layout">
+            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">  
+              <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label for="appId" data-bind="text:getTranslation('label.appName')"></label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="appId" 
+                           data-bind="ojComponent: {component: 'ojInputText', 
+                                                    value:appId, readOnly: true}">
+                </div>  
+              </div>
+              <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label for="appVersion" data-bind="text:getTranslation('label.appVersion')"></label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="appVersion" 
+                           data-bind="ojComponent: {component: 'ojInputText', 
+                                                    value:appVersion() === undefined ? getTranslation('label.allVersions') : appVersion() , readOnly: true}">
+                </div>  
+              </div>
+              <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label for="countsPerOSType" data-bind="text:getTranslation('label.countsPerOSType')"></label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="countsPerOSType" 
+                           data-bind="ojComponent: {component: 'ojInputText', 
+                                                    value:countsPerOSTypeString, readOnly: true}">
+                </div>  
+              </div>
+              <div class="oj-flex">  
+                <div class="oj-flex-item">
+                    <label for="countsPerDeviceModel" data-bind="text:getTranslation('label.countsPerDeviceModel')"></label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="countsPerDeviceModel" 
+                           data-bind="ojComponent: {component: 'ojInputText', 
+                                                    value:countsPerDeviceModelString, readOnly: true}">
+                </div>  
+              </div>
+            </div>
+        </div>
+
+        <div class="oj-flex oj-sm-flex-items-1">
+            <div class="oj-flex-item">
+               
+                <div class="oj-flex">
+                  <div class="oj-sm-5 oj-md-5 oj-lg-5 oj-xl-5">
+                      <input id="startDate" data-bind="ojComponent: {component: 'ojInputDate', optionChange:dateChanged,
+                                  value: startDate}" style="max-width: 80px;"/>
+                  </div>
+                  <div class="oj-sm-5 oj-md-5 oj-lg-5 oj-xl-5">
+                      <input id="endDate" data-bind="ojComponent: {component: 'ojInputDate', optionChange:dateChanged, 
+                          value: endDate}" style="max-width: 80px;"/>
+
+                  </div>
+                  <div class="oj-sm-1 oj-md-1 oj-lg-1 oj-xl-1">
+                      <button id= "button" style="min-width: 22px;"
+                              data-bind="click: setOneDay, 
+                                         ojComponent: { component: 'ojButton', label: '1d' }">
+                      </button>
+                  </div>
+                  <div class="oj-sm-1 oj-md-1 oj-lg-1 oj-xl-1">
+                      <button id= "button" style="min-width: 22px;"
+                              data-bind="click: setOneWeek, 
+                                         ojComponent: { component: 'ojButton', label: '1w' }">
+                      </button>
+                  </div>                    
+              </div>
+              
+            </div>
+            
+        </div>
+        <div class="oj-flex oj-sm-flex-items-1">
+            <div class="oj-sm-flex-initial oj-flex-item" style="max-width: 100px;">
+                <button data-bind="click: generateReport, ojComponent: { component: 'ojButton', label: 'Generate' }"></button>
+            </div>
+            <div class="oj-flex-item">
+                <div id="progressbar" 
+                    data-bind="
+                        visible: generatingReport(),
+                        ojComponent:{
+                            component: 'ojProgressbar',  
+                            value: progressValue}" 
+                    style="width: 200px; height: 10px;"></div>
+               <!-- <a data-bind="visible: !generatingReport(), attr:{ href: reportURI}, text: reportFilename"></a> -->
+               <a id="reportBtn" data-bind="click: clickReport, visible: !generatingReport(), attr:{ href: ''}, text: reportFilename"></a>
+            </div>
+        </div>
+        <div class="oj-flex">
+            
+            <div class="oj-flex-item">
+                <div id="areaChart" data-bind="ojComponent: {
+                        component: 'ojChart', 
+                        type: 'area', 
+                        series: deviceAreaSeries, 
+                        groups: areaGroups, 
+                        animationOnDisplay: 'auto',
+                        animationOnDataChange: 'auto',
+                        orientation: 'vertical',
+                        stack: 'on',
+                        hoverBehavior: 'dim'
+                     }"
+                     style="max-width:300px;width:100%;height:350px;padding:10px;">
+                </div>        
+            </div>
+        <!--    
+        </div>
+        <div class="oj-flex">
+        -->
+            <div class="oj-flex-item">
+                <div id="areaChart" data-bind="ojComponent: {
+                        component: 'ojChart', 
+                        type: 'area', 
+                        series: osAreaSeries, 
+                        groups: areaGroups, 
+                        animationOnDisplay: 'auto',
+                        animationOnDataChange: 'auto',
+                        orientation: 'vertical',
+                        stack: 'on',
+                        hoverBehavior: 'dim'
+                     }"
+                     style="max-width:300px;width:100%;height:350px;padding:10px;">
+                </div>        
+            </div>
+        </div>
+
+    </div>
+</div>

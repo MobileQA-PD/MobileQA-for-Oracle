@@ -1,0 +1,158 @@
+<!--
+ Copyright (c) 2014, 2016, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+ <div class="oj-applayout-content">
+  <div class="oj-applayout-fixed-top">
+
+    <header role="banner" class="oj-hybrid-applayout-header" data-bind="ojModule: headerConfig">
+        <h1 class="oj-hybrid-applayout-header-title" data-bind="text: router.currentState().label"></h1>
+    </header>
+  </div>      
+     
+  <div role="main" class="oj-hybrid-applayout-content"> 
+      <div class="oj-flex oj-sm-flex-items-1">
+          <div class="oj-flex-item">
+              <div>
+                  <h4 data-bind="text: getTranslation('label.applicationList')"></h4>
+                  <ul id="listview" aria-label="list using array" 
+                         data-bind="ojComponent: {component: 'ojListView', 
+                                     data: dataSource, item: {template: 'applications_template'}, 
+                                     selectionMode: 'single', selection:selectedApplications,
+                                      optionChange: applicationSelected}">
+                  </ul>     
+              </div>
+          </div>
+
+      </div>
+<!--
+      <div  class="oj-flex oj-sm-flex-items-1">
+          <div class="oj-flex-item" style="padding: 6px;">
+-->              
+              <div class="oj-flex">
+                  <div class="oj-flex-item">
+                      <span data-bind="text: getTranslation('label.appVersion')"></span>
+                  </div>
+                   <div class="oj-flex-item">
+                      <select id="grpdata" data-bind="ojComponent: {component: 'ojSelect', 
+                                          optionChange:versionSelected,
+                                           rootAttributes: {style:'max-width:10em'}}">
+                          <!-- ko foreach:appVersions -->
+                          <option data-bind="value:value, text:label"></option>
+                          <!-- /ko -->
+                      </select>                        
+                  </div>
+                  
+              </div>
+              <div class="oj-flex oj-sm-flex-items-1">
+                  
+                  <div class="oj-sm-12" id="pieChart1" data-bind="ojComponent: {
+                      component: 'ojChart', 
+                      type: 'pie', 
+                      dataLabel: function(dataContext){ return dataContext.label + (dataContext.value ? ` (${dataContext.value})` : ''); },
+                      series: deviceSeriesValue,
+                      animationOnDisplay: 'auto',
+                      animationOnDataChange: 'auto',                        
+                      styleDefaults: {pieInnerRadius: ko.toJS(0.5)},
+                      hoverBehavior: 'dim',
+                      selectionMode: 'single',
+                      dataLabelPosition: 'outsideSlice',
+                      selection: selectionDevice,
+                      optionChange:deviceSelected,
+                      pieCenter: {
+                        label: ko.toJS(centerLabel),
+                        labelStyle: 'font-size:20px;color:#999999;'
+                      },
+                      legend: { position: 'bottom' }
+                    }">
+                  </div> 
+                  <div class="oj-sm-12" id="pieChart2" data-bind="ojComponent: {
+                      component: 'ojChart', 
+                      type: 'pie', 
+                      dataLabel: function(dataContext){ return dataContext.label + (dataContext.value ? ` (${dataContext.value})` : ''); },
+                      series: osSeriesValue,
+                      animationOnDisplay: 'auto',
+                      animationOnDataChange: 'auto',
+                      styleDefaults: {pieInnerRadius: ko.toJS(0.5)},
+                      hoverBehavior: 'dim',
+                      selectionMode: 'single',
+                      dataLabelPosition: 'outsideSlice',
+                      selection: selectionOS,
+                      optionChange: osSelected,
+                      pieCenter: {
+                        label: ko.toJS(centerLabel),
+                        labelStyle: 'font-size:20px;color:#999999;'
+                      },
+                      legend: { position: 'bottom' }
+                    }">
+                  </div>                 
+              </div> 
+<!--
+          </div>
+      </div>
+-->
+  </div>       
+</div>      
+
+<script type="text/html" id="applications_template">
+  <li data-bind="attr: {id: $data['appId']}">
+      <div class="oj-flex">
+          <div class="oj-lg-10 oj-md-10 oj-sm-12">
+              <div class="oj-flex row">
+                  <div class="oj-lg-12">
+                      <span class="header" data-bind="text: appName"></span>
+                  </div>
+              </div>
+              <div class="oj-flex row">
+                  <div class="oj-lg-12">
+                      <span style="font-size:80%;" class="data" data-bind="text: appId"></span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </li>
+</script>
+<!-- 
+<script type="text/html" id="applications-template">
+  <div data-bind="ojComponent: {component: 'ojCollapsible'}">
+      <h3 id="h1" data-bind="text:$data['appId']"></h3>
+      <ul  data-bind="foreach: { data: appVersions, as: 'appVersion' }">
+
+          <li class="oj-flex" style="padding-left: 20px;" id="p1">
+              <span data-bind="text: appVersion"></span>
+              <button data-bind="click: $root.selectApplication, 
+                     ojComponent: { component: 'ojButton', label: appVersion }"
+          </li>
+      <ul>    
+  </div>
+</script>
+-->
+<!--    
+<div class="oj-flex oj-flex-items-pad oj-">
+  <div class="oj-sm-12  oj-md-3  oj-lg-3 oj-flex-item demo-coldrop-A">
+      <div class="leftTopLayout titlefontInView">
+          Application List
+      </div>
+      <div class = "leftLayout">
+          <ul id="listview" aria-label="swipe to reveal on listview item" 
+              data-bind="ojComponent: {component: 'ojListView', data: dataSource, item: {template: 'template'}, 
+                          selectionMode: 'single', selection: selectedId, 
+                          rootAttributes: {style: 'width:100%;height:100%'}}">
+          </ul>
+      </div>        
+  </div>
+  <script type="text/html" id="template">
+      <li style="padding:0" data-bind="attr: {id: appId}, click: $parent.onSelectItem" class="item-marker">
+          <div class="oj-offcanvas-outer-wrapper">
+              <div class="oj-offcanvas-inner-wrapper">
+
+                  <div style="padding:0.8571rem">
+                      <strong class="oj-text-sm oj-text-primary-color" data-bind="text: appName"></strong>
+                  </div>
+              </div>
+          </div>
+      </li>
+  </script>    
+</div>
+-->
+ 

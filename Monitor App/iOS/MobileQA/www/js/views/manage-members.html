@@ -1,0 +1,148 @@
+<!--    <div class="oj-applayout-fixed-top">
+
+      <header role="banner" class="oj-hybrid-applayout-header" data-bind="ojModule: headerConfig">
+          
+      </header>
+    </div> -->
+<div class="oj-applayout-content">
+
+    <div class="oj-applayout-fixed-top">
+
+        <header role="banner" class="oj-hybrid-applayout-header" data-bind="ojModule: headerConfig">
+
+        </header>
+    </div>
+
+    <div id="listviewContainer">
+        <button id="buttonOpener"data-bind="click:openDialog, 
+        visible: allItems().length < 2  ,
+        ojComponent: {component: 'ojButton', label: buttonAdd }"></button>
+        <ul id="listview" aria-label="swipe to reveal on listview item" contextmenu="itemMenu"
+            data-bind="ojComponent: {component: 'ojListView', data: dataSource, item: {template: 'template'},  ready: handleReady, destroy: handleDestroy, rootAttributes: {style: 'width:100%;'}}">
+        </ul>
+
+        <ul id="itemMenu" style="display:none" aria-label="Swipe Actions" data-bind="ojComponent: {component: 'ojMenu', select: handleMenuItemSelect, beforeOpen: handleMenuBeforeOpen}">
+
+            <li id="tag"><a href="#">Tag</a></li>
+            <li id="delete"><a href="#">Delete</a></li>
+        </ul>
+    </div>
+
+    <div id="dialogWrapper">
+        <div style="padding:0.8571rem" id="addmember" 
+             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+
+            <div id="div1">
+                 <label for="text-input" data-bind="text:getTranslation('label.Email')"></label>
+           
+                <input id="text-input" 
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText', 
+                                  value: email}"/>
+                <label for="text-input" data-bind="text:getTranslation('label.FirstName')"></label>
+
+                <input id="text-input" 
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText', 
+                                  value: firstName}"/>
+                <label for="text-input" data-bind="text:getTranslation('label.LastName')"></label>
+                <input id="text-input" 
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText', 
+                                  value: lastName}"/>                
+
+            </div>
+            <div class="oj-dialog-footer">
+                <button id="okButton" data-bind="click:handleSave_add, ojComponent: {component: 'ojButton', label:getTranslation('button.ok') }"> </button>
+                <button id="okButton" data-bind="click:handleClose, ojComponent: {component: 'ojButton', label:getTranslation('button.cancel') }"> </button>
+      
+            </div>
+    
+        </div>
+
+
+        <div style="padding:0.8571rem" id="modifymember" title="Modify Existing Member's Information" 
+             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+
+            <div id="div1">
+                <label for="text-input">First Name</label>
+                <input id="text-input" 
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText', 
+                                  value: firstName}"/>
+                <label for="text-input">Last Name</label>
+                <input id="text-input" 
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText', 
+                                  value: lastName}"/>
+                <label for="text-input">Email</label>
+                <input id="text-input" 
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText', 
+                                  value: email}"/>
+                <div class="oj-dialog-footer">
+                    <button id="okButton" data-bind="click:handleSave_modify, ojComponent: {component: 'ojButton', label:getTranslation('button.ok')}"> </button>
+                    <button id="okButton" data-bind="click:handleClose, ojComponent: {component: 'ojButton', label:getTranslation('button.cancel')}"> </button>
+
+                </div>
+    
+
+            </div>
+
+        </div>   
+
+        <div style="padding:0.8571rem" id="deletemember" title="Delete a Member" 
+             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+
+            <div class="oj-dialog-footer">
+                <button id="okButton" data-bind="click:handleSave_delete, ojComponent: {component: 'ojButton', label:getTranslation('button.ok')}"> </button>
+                <button id="okButton" data-bind="click:handleClose, ojComponent: {component: 'ojButton', label:getTranslation('button.cancel')}"> </button>
+
+            </div>
+    
+        </div>
+    </div>  
+
+
+    <script type="text/html" id="template">
+        <li style="padding:0" data-bind="attr: {id: id}" class="item-marker">
+            <div class="oj-offcanvas-outer-wrapper">
+                <div class="oj-offcanvas-inner-wrapper">
+
+                    <div style="padding:0.8571rem">
+                        <div class="oj-flex">
+                            <strong class="oj-flex-item" data-bind="text: firstName"></strong>
+                            <strong class="oj-flex-item" data-bind="text: lastName"></strong>
+                            
+                        </div>
+                        <strong class="oj-text-sm oj-text-primary-color" data-bind="text: email"></strong>
+                    </div>
+
+                    <div tabIndex="-1" data-bind="attr: {id: 'second_toolbar_'+id}" class="oj-offcanvas-end" style="width:225px">
+
+                        <div data-bind="click: $parent.handleFlag" class="oj-swipetoreveal-flag">
+                            <div class="oj-flex-bar" style="height:100%">
+                                <div class="oj-flex-bar-center-absolute">
+                                    <div class="oj-flex oj-sm-flex-direction-column">
+                                        <div title=".demo-library-icon-24" role="img" class="oj-flex-item demo-library-icon-24 demo-icon-font-24"></div>
+                                        <div style="padding-top: 10px" class="oj-flex-item">Modify</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-bind="click: $parent.handleTrash" class="oj-swipetoreveal-alert oj-swipetoreveal-default">
+                            <div class="oj-flex-bar" style="height:100%">
+                                <div class="oj-flex-bar-center-absolute">
+                                    <div class="oj-flex oj-sm-flex-direction-column">
+                                        <div title=".demo-library-icon-24" role="img" class="oj-flex-item demo-library-icon-24 demo-icon-font-24"></div>
+                                        <div style="padding-top: 10px" class="oj-flex-item">Trash</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </script>
+</div>
