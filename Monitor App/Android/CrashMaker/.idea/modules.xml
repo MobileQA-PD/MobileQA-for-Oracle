@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CrashMaker.iml" filepath="$PROJECT_DIR$/CrashMaker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crashreportlib-debug/crashreportlib-debug.iml" filepath="$PROJECT_DIR$/crashreportlib-debug/crashreportlib-debug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mqacore-debug/mqacore-debug.iml" filepath="$PROJECT_DIR$/mqacore-debug/mqacore-debug.iml" />
+    </modules>
+  </component>
+</project>
