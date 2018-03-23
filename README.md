@@ -18,7 +18,7 @@ MQA 하단 탭바의 "리포트" 탭을 누르면 앱 단위의 리포트를 볼
 <img src="https://github.com/MobileQA-PD/MobileQA-for-Oracle-Cloud/blob/master/Document/Images/crash_event_tabbar.png?raw=true" width="200" />
 <br/><br/>
 
-범위를 지정하여 조회할 수 있으며 보고 있는 내용을 PDF 파일로 생성할 수 있습니다.  
+범위를 지정하여 조회할 수 있으며 보고 있는 내용을 PDF 파일로 만들 수 있습니다.  
 <img src="https://github.com/MobileQA-PD/MobileQA-for-Oracle-Cloud/blob/master/Document/Images/crash_event_report.png?raw=true" width="200" />
 <br/><br/>
 
