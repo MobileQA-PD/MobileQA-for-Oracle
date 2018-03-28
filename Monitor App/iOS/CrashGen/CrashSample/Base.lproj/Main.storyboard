@@ -59,12 +59,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1l-Na-Skb">
+                                <rect key="frame" x="16" y="226" width="343" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.11594062122768634" green="0.572766084918788" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Feedback">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onClickFeedback:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LIT-21-0Id"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="buttonCrash" destination="bPA-Va-Brm" id="xAU-Vg-Fgm"/>
+                        <outlet property="buttonFeedback" destination="V1l-Na-Skb" id="cJc-Lo-CKv"/>
                         <outlet property="textMessage" destination="Rtv-oL-ASQ" id="Zw8-jA-Twr"/>
                         <outlet property="textUserId" destination="V53-fp-pyg" id="DVy-Cz-vR2"/>
                     </connections>

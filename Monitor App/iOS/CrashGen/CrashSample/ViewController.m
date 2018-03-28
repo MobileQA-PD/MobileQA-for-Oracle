@@ -8,11 +8,13 @@
 
 #import "ViewController.h"
 #import <CrashReportLib/CrashReport.h>
+#import <UserFeedback/UserFeedback.h>
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *textUserId;
 @property (weak, nonatomic) IBOutlet UIButton *buttonCrash;
 @property (weak, nonatomic) IBOutlet UILabel *textMessage;
+@property (weak, nonatomic) IBOutlet UIButton *buttonFeedback;
 @end
 
 @implementation ViewController
@@ -31,14 +33,18 @@
     [super viewDidLoad];
     
     [_buttonCrash setEnabled:false];
+    [_buttonFeedback setEnabled:false];
     
     NSString *cloudId = [self loadCloudId];
     NSLog(@"SAVED ID:%@", cloudId);
     
     if (cloudId != nil && ![cloudId isEqualToString:@""]) {
         [CrashReport setCrashReport:cloudId];
+        [UserFeedback setFeedback:cloudId];
+        
         [_textUserId setText:cloudId];
         [_buttonCrash setEnabled:true];
+        [_buttonFeedback setEnabled:true];
     }
 }
 
@@ -57,8 +63,10 @@
     else {
         [self saveCloudId:_textUserId.text];
         [CrashReport setCrashReport:_textUserId.text];
+        [UserFeedback setFeedback:_textUserId.text];
         
         [_buttonCrash setEnabled:true];
+        [_buttonFeedback setEnabled:true];
     }
 }
 
@@ -76,6 +84,19 @@
                           userInfo:nil];
         
         @throw e;
+    }
+}
+
+- (IBAction)onClickFeedback:(id)sender {
+    
+    [_textMessage setText:@""];
+    
+    if (_textUserId.text == nil || [_textUserId.text isEqualToString:@""]) {
+        [_textMessage setText:@"Input Cloud ID And Initialize"];
+        [_buttonFeedback setEnabled:false];
+    }
+    else {
+        [UserFeedback showFeedback];
     }
 }
 

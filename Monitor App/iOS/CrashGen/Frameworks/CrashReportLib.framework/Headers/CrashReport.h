@@ -14,9 +14,10 @@
 + (void) removeCustom : (NSString *)key;
 
 + (Boolean) hasExceptionLog;
-+ (void) saveExceptionLog : (NSException *)exception folderId:(NSString *)folderId;
++ (void) saveExceptionLog : (NSException *)exception folderId:(NSDictionary *)folderId enabled:(NSDictionary *)enabled;
 + (void) removeExceptionLog;
 + (NSString *) loadExceptionLog;
 + (NSString *) getFilePath;
-+ (NSString *) getExceptionLogString : (NSException *)exception  folderId:(NSString *)folderId;
++ (NSString *) getExceptionLogString : (NSException *)exception folderId:(NSDictionary *)folderId enabled:(NSDictionary *)enabled;
++ (Boolean) isValid:(NSDictionary *)cloudInfo;
 @end
