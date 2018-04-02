@@ -1,0 +1,431 @@
+/* 
+    Document   : override
+    Created on : <date>
+    Author     : <author>
+    Description:
+        This is where any of your application specific styles should be included
+*/
+
+/* Hides the content area until we are ready to display after paddings have been adjusted. 
+    oj-complete is a marker class that is applied by the appController 
+    after adjusting the content area. */
+.oj-applayout-content:not(.oj-complete) {
+  visibility: hidden;
+}
+
+.demo-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.demo-dashboard-icon:before {
+    content: url("images/dashboard.svg");
+}
+.oj-hover .demo-dashboard-icon:before {
+    content: url("images/dashboard_hover.svg");
+}
+.oj-selected .demo-dashboard-icon:before {
+    content: url("images/dashboard_selected.svg");
+}
+
+.demo-customers-icon:before {
+    content: url("images/customers.svg");
+}
+.oj-hover .demo-customers-icon:before {
+    content: url("images/customers_hover.svg");
+}
+.oj-selected .demo-customers-icon:before {
+    content: url("images/customers_selected.svg");
+}
+
+.demo-incidents-icon:before {
+    content: url("images/incidents.svg");
+}
+.oj-hover .demo-incidents-icon:before {
+    content: url("images/incidents_hover.svg");
+}
+.oj-selected .demo-incidents-icon:before {
+    content: url("images/incidents_selected.svg");
+}
+
+.demo-suppliers-icon:before {
+    content: url("images/suppliers.svg");
+}
+.oj-hover .demo-suppliers-icon:before {
+    content: url("images/suppliers_hover.svg");
+}
+.oj-selected .demo-suppliers-icon:before {
+    content: url("images/suppliers_selected.svg");
+}
+
+.demo-profile-icon:before {
+    content: url("images/profile.svg");
+}
+.oj-hover .demo-profile-icon:before {
+    content: url("images/profile_hover.svg");
+}
+.oj-selected .demo-profile-icon:before {
+    content: url("images/profile_selected.svg");
+}
+
+.login-btn{
+    background-color: orange!important;
+}
+
+.login-btn:hover{
+    background-color: #0582e8!important;
+}
+
+.demo-username{
+    color: grey;
+}
+
+.demo_desc_info{
+    color: lightgrey;
+    font-style:italic;
+    font-size:smaller;
+}
+
+ul.demo-wrap-ul li{
+    word-wrap: break-word;
+}
+
+.oj-navigationlist, .oj-navigationlist-listview-container {
+    overflow-x: auto;
+}
+
+.oj-hybrid-applayout-content {
+    padding: 20px;
+}
+
+.no-close .ui-dialog-titlebar-close {
+    display: none;
+}
+.color-red{
+    color:darkred;
+}
+.color-orange{
+    color:orange;
+}
+.demo-thumbnail{
+    min-width: 70px;
+    min-height: 80px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.demo-content{
+    margin-left:10px;
+}
+
+.leftLayout{
+    /*    width: 300px;*/
+    margin-bottom: 50px;
+}
+
+.leftTopLayout{
+    /*width: 286px;*/
+}
+
+.ui-dialog .ui-dialog-buttonpane button {
+    padding: 5px;
+}
+
+.titlefontInView{
+    text-align: center;
+    /*   border: 2px #F2552C solid; */
+    margin: 10px;
+    text-shadow: 2px 2px antiquewhite;
+    font-weight:bold;
+}
+
+.mainLeft{width:30%;}
+
+#radioButtonset2 {
+    margin-left: 40px;
+}
+
+table.wrapTable td.oj-table-data-cell,
+div.wrapDatagrid  .oj-datagrid-header-cell-content,
+div.wrapDatagrid  .oj-datagrid-cell-content{
+    white-space: normal;
+    word-break: break-all;
+}
+
+.crashleftList{
+    border-right: lightgrey;
+    border-style: solid;
+    border-bottom: none;
+    border-top: none;
+    border-left: none;
+    border-width: 1px;
+}
+
+/* Login page */
+/* Mixin from codepen http://codepen.io/auginator/pen/HbshE */
+#login {
+  background: url("../img/Splash.jpg") no-repeat fixed;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  color: black; }
+  @media only screen and (max-width: 1382px) {
+    #login {
+      /* background-position-x: 24%; */ } }
+  #login .main {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    height: 100%; }
+  #login .spacerTopMiddleBottom {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: 100%; }
+  #login .slideBar {
+    height: 100%; }
+    #login .slideBar .imageToBlur {
+      background: url("../img/Splash.jpg") no-repeat fixed;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      -webkit-background-size: cover;
+      background-size: cover;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: -1; }
+      @media only screen and (max-width: 1382px) {
+        #login .slideBar .imageToBlur {
+          /* background-position-x: 24%; */
+          /* height: 100vh; */
+        } }
+    #login .slideBar .blurrBkgnd {
+      -webkit-filter: blur(6px);
+      -moz-filter: blur(6px);
+      -o-filter: blur(6px);
+      -ms-filter: "blur(6px)";
+      filter: blur(6px); }
+    #login .slideBar .slTransparentLayer {
+      z-index: 10;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.32);
+      border-left: 1px solid rgba(255, 255, 255, 0.25); 
+      position: absolute;
+      top: 0;
+      width: 72%;
+    }
+    #login .slideBar .top {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: flex-end;
+      justify-content: flex-end; }
+      #login .slideBar .top .appLogoOuter {
+        border: solid 1px rgba(196, 200, 200, 0.35);
+        border-radius: 50%;
+        height: 102px;
+        width: 102px;
+        position: relative;
+        z-index: 26;
+        margin-right: 2rem;
+        margin-top: 3rem; }
+        #login .slideBar .top .appLogoOuter .innerCircle {
+          background: rgba(255, 255, 255, 0.25);
+          border-radius: 50%;
+          height: 92px;
+          width: 92px;
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          z-index: 25; }
+      #login .slideBar .top .sampleAppLogo {
+        content: url("../img/icons/login/productLogo.png"); }
+      #login .slideBar .top .absoluteCenter {
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0; }
+    #login .slideBar .middle {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: column;
+      flex-direction: column; }
+      #login .slideBar .middle .alignLoginControls {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap; }
+      #login .slideBar .middle .submitForm {
+        padding: 1.5rem 1rem 1.5rem 1rem;
+        border-left: solid 4px #42AE86;
+        background: white;
+        z-index: 12;
+        margin-left: -4px; }
+      #login .slideBar .middle .appName {
+        font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 1.4rem;
+        text-align: left;
+        font-weight: 200;
+        padding-left: 1rem;
+        padding-bottom: 1rem; }
+      #login .slideBar .middle .companyName {
+        font-family: "HelveticaNeueThin", "HelveticaNeue-Thin", "Helvetica Neue Thin", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 1.2rem;
+        font-weight: lighter;
+        text-align: left;
+        letter-spacing: 0.01em;
+        display: block;
+        padding-left: 1rem; }
+      #login .slideBar .middle .textInputM {
+        background: white;
+        border-top: solid;
+        border-top-color: white;
+        border-right: solid;
+        border-right-color: white;
+        border-left: solid;
+        border-left-color: white;
+        border-bottom: solid;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #c8cfd5;
+        width: 230px;
+        font-size: 1rem;
+        margin-bottom: .6rem;
+        margin-right: 1rem; }
+        #login .slideBar .middle .textInputM:-moz-placeholder {
+          color: #bfbfbf;
+          font-style: italic; }
+        #login .slideBar .middle .textInputM::-moz-placeholder {
+          color: #bfbfbf;
+          font-style: italic; }
+        #login .slideBar .middle .textInputM:-ms-input-placeholder {
+          color: #bfbfbf;
+          font-style: italic; }
+        #login .slideBar .middle .textInputM::-webkit-input-placeholder {
+          color: #bfbfbf;
+          font-style: italic; }
+      #login .slideBar .middle button.mobile {
+        background: white;
+        border: 1px solid #c8cfd5;
+        border-radius: 3px;
+        font-family: "HelveticaNeue", "Helvetica Neue", "HelveticaNeueRoman", "HelveticaNeue-Roman", "Helvetica Neue Roman", Helvetica, Arial, sans-serif;
+        color: #6c6c6c;
+        text-align: center;
+        font-weight: 200;
+        padding: .6rem 1.2rem .6rem 1.2rem;
+        margin-bottom: 1rem;
+        margin-right: 1rem; }
+        #login .slideBar .middle button.mobile:hover {
+          border: 1px solid #0572CE;
+          color: #0572CE; }
+        #login .slideBar .middle button.mobile:active {
+          border: 1px solid #0572CE;
+          color: white; }
+      #login .slideBar .middle .rememberM {
+        font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: .9rem;
+        color: #646464;
+        padding-left: 10px; }
+      #login .slideBar .middle a.forgotLinkM {
+        font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: .9rem; }
+        #login .slideBar .middle a.forgotLinkM:link {
+          color: #0572CE;
+          text-decoration: none; }
+        #login .slideBar .middle a.forgotLinkM:visited {
+          color: #0572CE;
+          text-decoration: none; }
+        #login .slideBar .middle a.forgotLinkM:hover, #login .slideBar .middle a.forgotLinkM:active, #login .slideBar .middle a.forgotLinkM:focus {
+          text-decoration: underline;
+          outline: none; }
+      #login .slideBar .middle input.mbl[type="checkbox"] {
+        display: none; }
+      #login .slideBar .middle input.mbl[type="checkbox"] + label span {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        margin: -1px 4px 0 0;
+        vertical-align: middle;
+        background: url("../img/icons/login/roundCheckboxM.png") left top no-repeat;
+        cursor: pointer; }
+      #login .slideBar .middle input.mbl[type="checkbox"]:checked + label span {
+        background: url("../img/icons/login/roundCheckboxM.png") -24px top no-repeat; }
+    #login .slideBar .bottom {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: flex-end;
+      justify-content: flex-end;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      min-height: 2.6rem; }
+      #login .slideBar .bottom .posOracleLogo {
+        width: 100px;
+        height: 14px;
+        padding-right: 4rem;
+        padding-bottom: .5rem; }
+      #login .slideBar .bottom .oracleLogo {
+        content: url("../img/icons/login/Oraclelogo.svg"); }
+
+
+.oj-hybrid-applayout-header{
+    /*margin-top:20px;*/
+    background-color: #ffffff;
+    min-height: 40px;
+}
+
+.oj-helper-text-align-center{
+    text-align: center !important;
+}
+
+.qa_corner_header{
+    height: 100%;
+    font-weight:bold;
+}
+.qa_corner_context{
+     height: 100%;
+}
+
+
+
+    .demo-tile {
+      font-weight: bold;
+    }
+    
+    .demo-centering-container {
+      text-align: center;
+      padding: 0;
+    }
+    
+    .demo-masonry-layout {
+      display: inline-block;
+      width: 320px;
+    }
+    
+    @media (min-width: 1024px) {
+      .demo-masonry-layout {
+        width: 480px;
+      }
+    }
+    
+    @media (min-width: 1224px) {
+      .demo-masonry-layout {
+        width: 640px;
+      }
+    }
+    
+    @media (min-width: 1500px) {
+      .demo-masonry-layout {
+        width: 800px;
+      }
+    }
+    
+    .demo-scroll-container {
+      overflow: auto;
+    }

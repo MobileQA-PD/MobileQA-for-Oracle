@@ -50,11 +50,6 @@
     <true/>
     <key>NSAppTransportSecurity</key>
     <dict>
-      <key>NSExceptionDomains</key>
-      <dict>
-        <key>mobile-a522193.mobileenv.us2.oraclecloud.com</key>
-        <dict/>
-      </dict>
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
