@@ -95,3 +95,4 @@ typings/
 # 사람과꿈
 **/DerivedData/
 **/Build/
+*.xcuserstate
