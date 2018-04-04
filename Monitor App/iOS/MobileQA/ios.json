@@ -27,16 +27,16 @@
   },
   "installed_plugins": {
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "kr.peopledream.MobileQA.kab"
+      "PACKAGE_NAME": "kr.peopledream.MobileQA.nhis"
     },
     "cordova-plugin-file-opener2": {
-      "PACKAGE_NAME": "kr.peopledream.MobileQA.kab"
+      "PACKAGE_NAME": "kr.peopledream.MobileQA.nhis"
     },
     "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "kr.peopledream.MobileQA.kab"
+      "PACKAGE_NAME": "kr.peopledream.MobileQA.nhis"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "kr.peopledream.MobileQA.kab"
+      "PACKAGE_NAME": "kr.peopledream.MobileQA.nhis"
     }
   },
   "dependent_plugins": {},

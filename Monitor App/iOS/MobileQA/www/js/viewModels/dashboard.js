@@ -104,6 +104,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe',
       }
 
       self.getSummary = function () {
+        if (self.selectedAppId() === '') return;
+
         var url = encodeURI('QoSEventAggService/summary?appId=' +
                 self.selectedAppId() + '&appVersion=' +
                 self.selectedAppVersion())

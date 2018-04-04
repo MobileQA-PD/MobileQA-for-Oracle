@@ -13,12 +13,12 @@
 		<key>CFBundleVersion</key>
 		<string>1.0.0</string>
 		<key>SigningIdentity</key>
-		<string>iPhone Developer: Seung Woo Lee (95E2Z3VF5E)</string>
+		<string>iPhone Developer: 영희 최 (SH4755P768)</string>
 	</dict>
 	<key>ArchiveVersion</key>
 	<integer>2</integer>
 	<key>CreationDate</key>
-	<date>2018-04-03T02:36:11Z</date>
+	<date>2018-04-04T09:14:49Z</date>
 	<key>Name</key>
 	<string>MobileQA</string>
 	<key>SchemeName</key>

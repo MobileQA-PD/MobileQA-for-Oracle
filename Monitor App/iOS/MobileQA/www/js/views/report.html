@@ -26,10 +26,10 @@
                 <div class="oj-flex-item">
                     <input id="appVersion" 
                            data-bind="ojComponent: {component: 'ojInputText', 
-                                                    value:appVersion() === undefined ? getTranslation('label.allVersions') : appVersion() , readOnly: true}">
+                                                    value:appVersion() === '%' ? getTranslation('label.allVersions') : appVersion() , readOnly: true}">
                 </div>  
               </div>
-              <div class="oj-flex" data-bind="visible: analyticsExport()">  
+              <div class="oj-flex">  
                 <div class="oj-flex-item">
                     <label for="countsPerOSType" data-bind="text:getTranslation('label.countsPerOSType')"></label>
                 </div>
@@ -39,7 +39,7 @@
                                                     value:countsPerOSTypeString, readOnly: true}">
                 </div>  
               </div>
-              <div class="oj-flex" data-bind="visible: analyticsExport()">  
+              <div class="oj-flex">  
                 <div class="oj-flex-item">
                     <label for="countsPerDeviceModel" data-bind="text:getTranslation('label.countsPerDeviceModel')"></label>
                 </div>
@@ -93,12 +93,12 @@
                         ojComponent:{
                             component: 'ojProgressbar',  
                             value: progressValue}" 
-                    style="width: 200px; height: 10px;"></div>
+                    style="width: 200px; height: 10px; margin: 13px;"></div>
                <!-- <a data-bind="visible: !generatingReport(), attr:{ href: reportURI}, text: reportFilename"></a> -->
                <a id="reportBtn" data-bind="click: clickReport, visible: !generatingReport(), attr:{ href: ''}, text: reportFilename"></a>
             </div>
         </div>
-        <div class="oj-flex" data-bind="visible: analyticsExport()">
+        <div class="oj-flex">
             
             <div class="oj-flex-item">
                 <div id="areaChart" data-bind="ojComponent: {

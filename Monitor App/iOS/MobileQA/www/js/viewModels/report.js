@@ -90,43 +90,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
           return
         }
 
-        if (!self.analyticsExport()) {
-          var params = self.app.router.currentState().value
-          var queryString = ''
-          for (var key in params) {
-            queryString += '&' + key + '=' + params[key]
-          }
-          queryString = encodeURI(queryString.substring(1, queryString.length))
-          console.log('queryString: ' + queryString)
-
-          self.crashEventIdArray = []
-          var url = 'QoSEventAggService/events?' + queryString
-          mbe.invokeCustomAPI(url, 'GET', null, function (statusCode, data) {
-            console.log(JSON.stringify(data))
-  
-            data.items.sort(function (a, b) {
-              return a.id > b.id ? -1 : a.id < b.id ? 1 : 0
-            })
-  
-            if (data.items.length > 0) {
-              for (var i = 0; i < data.items.length; i++) {
-                try {
-                  self.crashEventIdArray.push(parseInt(data.items[i].id))
-                } catch (error) {
-                  console.log('crash event id is invalid: ' + data.items[i].id)
-                }
-              }
-            }
-
-            self.generateEnabled(true);
-          },
-          function (error) {
-          })
-        } else {
+        if (self.analyticsExport()) {
           var sdate = new Date(self.startDate())
           var edate = new Date(self.endDate())
           console.log('sdate: ' + sdate)
-  
+
           console.log('accessToken: ' + mbe.getAccessToken())
   
           var baseUrl = mcsconfig.mobileBackends.QoS_MBE.baseUrl
@@ -152,113 +120,254 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
             data: JSON.stringify(reqBody)
           }).done(function (data, statusCode) {
             console.log('data: ' + JSON.stringify(data))
-            // filter by appName and version
-            data.items = self.filterItems(data.items)
-            console.log('filtered data: ' + JSON.stringify(data))
-            var deviceModelMap = {}
-            var osMap = {}
-            var monthAndDateMap = {}
-            self.areaGroups([])
-            self.crashEventIdArray = []
-  
-            for (var i = 0; i < data.items.length; i++) {
-              var monthAndDate = self.toMonthAndDate(new Date(data.items[i].timestamp))
-  
-              if (monthAndDateMap[monthAndDate] === undefined) {
-                monthAndDateMap[monthAndDate] = {}
-              }
-  
-              var prop = data.items[i].properties
-  
-              if (prop.id) {
-                try {
-                  self.crashEventIdArray.push(parseInt(prop.id))
-                } catch (error) {
-                  console.log('crash event id is invalid: ' + prop.id)
-                }
-              }
-  
-              if (deviceModelMap[prop.deviceModel] === undefined) {
-                deviceModelMap[prop.deviceModel] = []
-              }
-  
-              var osKey = prop.osName + ' ' + prop.os_Version
-              if (osMap[osKey] === undefined) {
-                osMap[osKey] = []
-              }
-  
-              if (monthAndDateMap[monthAndDate][prop.deviceModel] === undefined) {
-                monthAndDateMap[monthAndDate][prop.deviceModel] = 1
-              } else {
-                monthAndDateMap[monthAndDate][prop.deviceModel]++
-              }
-  
-              if (monthAndDateMap[monthAndDate][osKey] === undefined) {
-                monthAndDateMap[monthAndDate][osKey] = 1
-              } else {
-                monthAndDateMap[monthAndDate][osKey]++
-              }
-            }
-  
-            var dateArray = []
-            for (var time = sdate.getTime(); time < edate.getTime(); time += (24 * 60 * 60 * 1000)) {
-              dateArray.push(self.toMonthAndDate(new Date(time)))
-            }
-  
-            self.areaGroups(dateArray)
-            for (var i = 0; i < dateArray.length; i++) {
-              for (var key in deviceModelMap) {
-                  if (monthAndDateMap[dateArray[i]] === undefined ||
-                    monthAndDateMap[dateArray[i]][key] === undefined) {
-                    deviceModelMap[key].push(0)
-                  } else {
-                    deviceModelMap[key].push(monthAndDateMap[dateArray[i]][key])
-                  }
-              }
-              for (var key in osMap) {
-                if (monthAndDateMap[dateArray[i]] === undefined ||
-                  monthAndDateMap[dateArray[i]][key] === undefined) {
-                  osMap[key].push(0)
-                } else {
-                  osMap[key].push(monthAndDateMap[dateArray[i]][key])
-                }
-              }
-            }
-  
-            console.log('areaGroups: ' + JSON.stringify(self.areaGroups()))
-            console.log('deviceModelMap: ' + JSON.stringify(deviceModelMap))
-            console.log('osMap: ' + JSON.stringify(osMap))
-  
-            self.deviceAreaSeries([])
-            self.countsPerDeviceModel = {}
-            for (var key in deviceModelMap) {
-              self.deviceAreaSeries.push({ 'name': key, 'items': deviceModelMap[key] })
-              // sum each array
-              self.countsPerDeviceModel[key] = deviceModelMap[key].reduce(function (value1, value2) {
-                return value1 + value2
-              }, 0)
-            }
-  
-            self.osAreaSeries([])
-            self.countsPerOSType = {}
-            for (var key in osMap) {
-              self.osAreaSeries.push({ 'name': key, 'items': osMap[key] })
-              self.countsPerOSType[key] = osMap[key].reduce(function (value1, value2) {
-                return value1 + value2
-              }, 0)
-            }
-            self.reportFilename('')
-            self.reportURI('')
-            var deviceString = JSON.stringify(self.countsPerDeviceModel)
-            var osString = JSON.stringify(self.countsPerOSType)
-            self.countsPerDeviceModelString(deviceString.substring(1, deviceString.length - 1))
-            self.countsPerOSTypeString(osString.substring(1, osString.length - 1))
-
+            self.doAnalytics(data.items);
             self.generateEnabled(true);
           }).fail(function (xhr, statusCode) {
             console.log('ERROR: ' + statusCode)
           })
+        } else{
+          var params = self.app.router.currentState().value
+          var queryString = encodeURI(`appVersion=${self.appVersion()}&appId=${self.appId()}`)
+          console.log('queryString: ' + queryString)
+
+          self.crashEventIdArray = []
+          var url = 'QoSEventAggService/events?' + queryString
+          mbe.invokeCustomAPI(url, 'GET', null, function (statusCode, data) {
+            console.log('data: ' + JSON.stringify(data))
+            self.doAnalyticsAgg(data.items);
+            self.generateEnabled(true);
+          },
+          function (error) {
+          })
         }
+      }
+
+      self.doAnalytics = (items) => {
+        var sdate = new Date(self.startDate())
+        var edate = new Date(self.endDate())
+        console.log('sdate: ' + sdate)
+
+        // filter by appName and version
+        items = self.filterItems(items)
+        console.log('filtered data: ' + JSON.stringify(items))
+
+        var deviceModelMap = {}
+        var osMap = {}
+        var monthAndDateMap = {}
+        self.areaGroups([])
+        self.crashEventIdArray = []
+
+        for (var i = 0; i < items.length; i++) {
+          var monthAndDate = self.toMonthAndDate(new Date(items[i].timestamp))
+
+          if (monthAndDateMap[monthAndDate] === undefined) {
+            monthAndDateMap[monthAndDate] = {}
+          }
+
+          var prop = items[i].properties
+
+          if (prop.id) {
+            try {
+              self.crashEventIdArray.push(parseInt(prop.id))
+            } catch (error) {
+              console.log('crash event id is invalid: ' + prop.id)
+            }
+          }
+
+          if (deviceModelMap[prop.deviceModel] === undefined) {
+            deviceModelMap[prop.deviceModel] = []
+          }
+
+          var osKey = prop.osName + ' ' + prop.os_Version
+          if (osMap[osKey] === undefined) {
+            osMap[osKey] = []
+          }
+
+          if (monthAndDateMap[monthAndDate][prop.deviceModel] === undefined) {
+            monthAndDateMap[monthAndDate][prop.deviceModel] = 1
+          } else {
+            monthAndDateMap[monthAndDate][prop.deviceModel]++
+          }
+
+          if (monthAndDateMap[monthAndDate][osKey] === undefined) {
+            monthAndDateMap[monthAndDate][osKey] = 1
+          } else {
+            monthAndDateMap[monthAndDate][osKey]++
+          }
+        }
+
+        var dateArray = []
+        for (var time = sdate.getTime(); time < edate.getTime(); time += (24 * 60 * 60 * 1000)) {
+          dateArray.push(self.toMonthAndDate(new Date(time)))
+        }
+
+        self.areaGroups(dateArray)
+        for (var i = 0; i < dateArray.length; i++) {
+          for (var key in deviceModelMap) {
+              if (monthAndDateMap[dateArray[i]] === undefined ||
+                monthAndDateMap[dateArray[i]][key] === undefined) {
+                deviceModelMap[key].push(0)
+              } else {
+                deviceModelMap[key].push(monthAndDateMap[dateArray[i]][key])
+              }
+          }
+          for (var key in osMap) {
+            if (monthAndDateMap[dateArray[i]] === undefined ||
+              monthAndDateMap[dateArray[i]][key] === undefined) {
+              osMap[key].push(0)
+            } else {
+              osMap[key].push(monthAndDateMap[dateArray[i]][key])
+            }
+          }
+        }
+
+        console.log('areaGroups: ' + JSON.stringify(self.areaGroups()))
+        console.log('deviceModelMap: ' + JSON.stringify(deviceModelMap))
+        console.log('osMap: ' + JSON.stringify(osMap))
+
+        self.deviceAreaSeries([])
+        self.countsPerDeviceModel = {}
+        for (var key in deviceModelMap) {
+          self.deviceAreaSeries.push({ 'name': key, 'items': deviceModelMap[key] })
+          // sum each array
+          self.countsPerDeviceModel[key] = deviceModelMap[key].reduce(function (value1, value2) {
+            return value1 + value2
+          }, 0)
+        }
+
+        self.osAreaSeries([])
+        self.countsPerOSType = {}
+        for (var key in osMap) {
+          self.osAreaSeries.push({ 'name': key, 'items': osMap[key] })
+          self.countsPerOSType[key] = osMap[key].reduce(function (value1, value2) {
+            return value1 + value2
+          }, 0)
+        }
+        self.reportFilename('')
+        self.reportURI('')
+        var deviceString = JSON.stringify(self.countsPerDeviceModel)
+        var osString = JSON.stringify(self.countsPerOSType)
+        self.countsPerDeviceModelString(deviceString.substring(1, deviceString.length - 1))
+        self.countsPerOSTypeString(osString.substring(1, osString.length - 1))
+      }
+
+      self.doAnalyticsAgg = (items) => {
+        var sdate = new Date(self.startDate())
+        var edate = new Date(self.endDate())
+        console.log('sdate: ' + sdate)
+
+        let sDateString = self.toDateString(sdate);
+        let eDateString = self.toDateString(edate);
+
+        // filter by appName and version
+        items = self.filterItemsAgg(items).filter((item) => {
+          let dateString = self.toDateString(new Date(item.createdOn))
+          return dateString >= sDateString && dateString <= eDateString
+        })
+        console.log('filtered data: ' + JSON.stringify(items))
+
+        var deviceModelMap = {}
+        var osMap = {}
+        var monthAndDateMap = {}
+        self.areaGroups([])
+        self.crashEventIdArray = []
+
+        items = items.sort((a, b) => {
+          return a.id > b.id ? -1 : a.id < b.id ? 1 : 0
+        })
+
+        if (items.length > 0) {
+          items.forEach((item) => {
+            var monthAndDate = self.toMonthAndDate(new Date(item.createdOn))
+  
+            if (monthAndDateMap[monthAndDate] === undefined) {
+              monthAndDateMap[monthAndDate] = {}
+            }
+  
+            if (item.id) {
+              try {
+                self.crashEventIdArray.push(parseInt(item.id))
+              } catch (error) {
+                console.log('crash event id is invalid: ' + item.id)
+              }
+            }
+  
+            if (deviceModelMap[item.deviceModel] === undefined) {
+              deviceModelMap[item.deviceModel] = []
+            }
+  
+            var osKey = item.osName + ' ' + item.os_Version
+            if (osMap[osKey] === undefined) {
+              osMap[osKey] = []
+            }
+  
+            if (monthAndDateMap[monthAndDate][item.deviceModel] === undefined) {
+              monthAndDateMap[monthAndDate][item.deviceModel] = 1
+            } else {
+              monthAndDateMap[monthAndDate][item.deviceModel]++
+            }
+  
+            if (monthAndDateMap[monthAndDate][osKey] === undefined) {
+              monthAndDateMap[monthAndDate][osKey] = 1
+            } else {
+              monthAndDateMap[monthAndDate][osKey]++
+            }
+          })
+        }
+
+        var dateArray = []
+        for (var time = sdate.getTime(); time < edate.getTime(); time += (24 * 60 * 60 * 1000)) {
+          dateArray.push(self.toMonthAndDate(new Date(time)))
+        }
+
+        self.areaGroups(dateArray)
+        for (var i = 0; i < dateArray.length; i++) {
+          for (var key in deviceModelMap) {
+              if (monthAndDateMap[dateArray[i]] === undefined ||
+                monthAndDateMap[dateArray[i]][key] === undefined) {
+                deviceModelMap[key].push(0)
+              } else {
+                deviceModelMap[key].push(monthAndDateMap[dateArray[i]][key])
+              }
+          }
+          for (var key in osMap) {
+            if (monthAndDateMap[dateArray[i]] === undefined ||
+              monthAndDateMap[dateArray[i]][key] === undefined) {
+              osMap[key].push(0)
+            } else {
+              osMap[key].push(monthAndDateMap[dateArray[i]][key])
+            }
+          }
+        }
+
+        console.log('areaGroups: ' + JSON.stringify(self.areaGroups()))
+        console.log('deviceModelMap: ' + JSON.stringify(deviceModelMap))
+        console.log('osMap: ' + JSON.stringify(osMap))
+
+        self.deviceAreaSeries([])
+        self.countsPerDeviceModel = {}
+        for (var key in deviceModelMap) {
+          self.deviceAreaSeries.push({ 'name': key, 'items': deviceModelMap[key] })
+          // sum each array
+          self.countsPerDeviceModel[key] = deviceModelMap[key].reduce(function (value1, value2) {
+            return value1 + value2
+          }, 0)
+        }
+
+        self.osAreaSeries([])
+        self.countsPerOSType = {}
+        for (var key in osMap) {
+          self.osAreaSeries.push({ 'name': key, 'items': osMap[key] })
+          self.countsPerOSType[key] = osMap[key].reduce(function (value1, value2) {
+            return value1 + value2
+          }, 0)
+        }
+        self.reportFilename('')
+        self.reportURI('')
+        var deviceString = JSON.stringify(self.countsPerDeviceModel)
+        var osString = JSON.stringify(self.countsPerOSType)
+        self.countsPerDeviceModelString(deviceString.substring(1, deviceString.length - 1))
+        self.countsPerOSTypeString(osString.substring(1, osString.length - 1))
       }
 
       // filter by mobileAppName and mobileAppVersion if configured
@@ -266,7 +375,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
         var appId = self.appId()
         var appVersion = self.appVersion()
         var filterOperation = null
-        if (appVersion !== undefined && appVersion !== '') {
+        if (appVersion !== '%') {
           filterOperation = function (value) {
             return value.properties.appId === appId &&
               value.properties.appVersion === appVersion
@@ -277,6 +386,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
           }
         }
         return items.filter(filterOperation)
+      }
+
+      self.filterItemsAgg = function (items) {
+        var appVersion = self.appVersion()
+        var filterOperation = null
+        if (appVersion !== '%') {
+          filterOperation = function (value) {
+            return value.properties.appVersion === appVersion
+          }
+          return items.filter(filterOperation)
+        } else {
+          return items;
+        }
       }
 
       self.generateReport = function () {
@@ -393,7 +515,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
         } else {
           self.appId(params['appId'])
           if (params['appVersion'] === '%' || params['appVersion'] == null) {
-            self.appVersion(undefined)
+            self.appVersion('%')
           } else {
             self.appVersion(params['appVersion'])
           }
