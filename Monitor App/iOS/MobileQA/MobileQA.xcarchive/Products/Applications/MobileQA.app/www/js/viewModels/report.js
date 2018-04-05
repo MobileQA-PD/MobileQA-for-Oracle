@@ -22,9 +22,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
       self.appId = ko.observable('')
       self.appVersion = ko.observable('')
 
-      var today = new Date()
-      var tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000)
-      self.startDate = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000)))
+      self.toDateString = function (date) {
+        var text = ''
+        text += date.getFullYear()
+        text += '-'
+        text += date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)
+        text += '-'
+        text += date.getDate() >= 10 ? date.getDate() : '0' + date.getDate()
+        return text
+      }
+
+      let today = new Date(self.toDateString(new Date()));
+      let tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+      let aWeekAgo = new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000);
+      self.startDate = ko.observable(oj.IntlConverterUtils.dateToLocalIso(aWeekAgo))
       self.endDate = ko.observable(oj.IntlConverterUtils.dateToLocalIso(tomorrow))
 
       self.areaGroups = ko.observableArray([])
@@ -51,20 +62,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
       self.headerConfig = { 'viewName': 'header', 'viewModelFactory': app.getHeaderModel() }
 
       self.setOneDay = function () {
-        var today = new Date()
-        var tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000)
+        let today = new Date(self.toDateString(new Date()));
+        let tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
         self.startDate(oj.IntlConverterUtils.dateToLocalIso(today))
         self.endDate(oj.IntlConverterUtils.dateToLocalIso(tomorrow))
-      }
-
-      self.toDateString = function (date) {
-        var text = ''
-        text += date.getFullYear()
-        text += '-'
-        text += date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)
-        text += '-'
-        text += date.getDate() >= 10 ? date.getDate() : '0' + date.getDate()
-        return text
       }
 
       self.toMonthAndDate = function (date) {
@@ -76,9 +77,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
       }
 
       self.setOneWeek = function () {
-        var today = new Date()
-        var tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000)
-        self.startDate(oj.IntlConverterUtils.dateToLocalIso(new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000)))
+        let today = new Date(self.toDateString(new Date()));
+        let tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+        let aWeekAgo = new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000);
+        self.startDate(oj.IntlConverterUtils.dateToLocalIso(aWeekAgo))
         self.endDate(oj.IntlConverterUtils.dateToLocalIso(tomorrow))
       }
 
@@ -91,8 +93,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
         }
 
         if (self.analyticsExport()) {
-          var sdate = new Date(self.startDate())
-          var edate = new Date(self.endDate())
+          let sdate = new Date(self.startDate())
+          let edate = new Date(self.endDate())
           console.log('sdate: ' + sdate)
 
           console.log('accessToken: ' + mbe.getAccessToken())
@@ -121,7 +123,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
           }).done(function (data, statusCode) {
             console.log('data: ' + JSON.stringify(data))
             self.doAnalytics(data.items);
-            self.generateEnabled(true);
+            self.generateEnabled(self.crashEventIdArray.length > 0);
           }).fail(function (xhr, statusCode) {
             console.log('ERROR: ' + statusCode)
           })
@@ -135,7 +137,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
           mbe.invokeCustomAPI(url, 'GET', null, function (statusCode, data) {
             console.log('data: ' + JSON.stringify(data))
             self.doAnalyticsAgg(data.items);
-            self.generateEnabled(true);
+            self.generateEnabled(self.crashEventIdArray.length > 0);
           },
           function (error) {
           })
@@ -262,7 +264,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
         // filter by appName and version
         items = self.filterItemsAgg(items).filter((item) => {
           let dateString = self.toDateString(new Date(item.createdOn))
-          return dateString >= sDateString && dateString <= eDateString
+          return dateString >= sDateString && dateString < eDateString
         })
         console.log('filtered data: ' + JSON.stringify(items))
 
@@ -411,12 +413,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'mbe', 'mcsconfig',
           'startDate': self.toDateString(new Date(self.startDate())),
           'endDate': self.toDateString(new Date(self.endDate())),
           'appId': self.appId(),
-          'appVersion': self.appVersion(),
+          'appVersion': self.appVersion() === '%' ? '' : self.appVersion(),
           'createdOn': new Date(),
           'idArray': self.crashEventIdArray,
           'countsPerDeviceModel': self.countsPerDeviceModel,
           'countsPerOSType': self.countsPerOSType,
-          'folderId': cdata.folderId.Reports
+          'folderId': cdata.folderId.Reports,
+          'timezoneOffset': new Date().getTimezoneOffset()
         }
 
         console.log('reqBody: ' + JSON.stringify(reqBody))
