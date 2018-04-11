@@ -3,10 +3,11 @@
 사용자의 Feedback을 수집합니다.
 
 #### 1. 라이브러리 설정
-***UserFeedback.framework*** 과 ***MqaCore.framework*** 를 프로젝트에 포함시켜야 합니다.   
+***UserFeedback.framework*** 과 ***MqaCore.framework*** 를 프로젝트에 import 합니다.  
+(자세한 import 방법은 Apple 개발자 document를 참고하시기 바랍니다.)
 
 Project Navigator에 프로젝트를 선택합니다.  
-우측 화면의 TARGETS에서 프로젝트를 선택합니다.  
+우측 화면의 TARGETS에서 프로젝트를 선택합니다.
 General 탭 하위의 Embedded Binaries에 ***UserFeedback.framewor*** 과 ***MqaCore.framework*** 를 추가합니다.  
 
 (세부적인 Framework Import 방법은 Apple의 개발자 document를 참고하세요)
@@ -47,4 +48,37 @@ General 탭 하위의 Embedded Binaries에 ***UserFeedback.framewor*** 과 ***Mq
 }
 ```
 
-### '** user_id **'은 오라클 서비스 접속을 위해 사전에 제공된 id를 입력하여야 합니다.
+#### 5. API 소개
+
+~~~~
++ (void) setFeedback:(NSString *)userId;
+~~~~
+
+* Crash 정보를 Cloud에 전송 하도록 설정
+* 앱 실행 시 MainActivity의 onCreate에서 설정 하는것을 권장한다.
+* Parameters
+    - id : 사전에 제공되는 Oracle Cloud ID
+
+~~~~
++ (void) putCustom : (NSString *)value  ForKey:(NSString *)forKey;
+~~~~
+* Crash 정보를 Cloud에 전송할때 추가로 전송하고자 하는 정보를 등록 및 수정
+* 앱 실행중 언제든 사용 가능하다.
+* Parameters
+    - value : value string
+    - forKey : key string
+
+~~~~
++ (void) removeCustom : (NSString *)key;
+~~~~
+* 기 입력된 custom 정보를 삭제
+* 앱 실행중 언제든 사용 가능하다.
+* Parameters
+    - key : key string
+
+~~~~
++ (void) showFeedback;
+~~~~
+* User Feedback 화면을 노출.
+* 앱 실행중 언제든 사용 가능하다.
+
