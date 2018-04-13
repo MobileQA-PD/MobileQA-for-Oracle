@@ -1,0 +1,6 @@
+framework module UserFeedback {
+  umbrella header "UserFeedback.h"
+
+  export *
+  module * { export * }
+}
