@@ -17,11 +17,21 @@
 + (NSMutableDictionary *) getOsInfoGroup;
 + (NSMutableDictionary *) getAppInfoGroup;
 + (NSMutableDictionary *) getUsageInfoGroup;
+
 + (void) postJsonToOracle:(NSString *)url
                      Body:(NSString *)body
          CompletionHander:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler
           OracleBackendId:(NSString *)oracleBackendId
-                OracleKey:(NSString *)oracleKey;
+                OracleKey:(NSString *)oracleKey
+                  timeout:(int)sec;
+
++ (void) postJsonToOracle:(NSString *)url
+                     Body:(NSString *)body
+         CompletionHander:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler
+          OracleBackendId:(NSString *)oracleBackendId
+                OracleKey:(NSString *)oracleKey
+                  timeout:(int)sec
+                 priority:(float)priority;
 
 // Private
 + (void) getMemoryState:(natural_t *)total Free:(natural_t *)free Used:(natural_t *)used;
