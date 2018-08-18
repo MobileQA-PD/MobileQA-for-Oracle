@@ -1,1 +1,1 @@
-include ':app', ':mqacore-debug', ':crashreportlib-debug', ':userfeedback-debug'
+include ':app', ':mqacore-debug', ':crashreportlib-debug', ':userfeedback-debug', ':mqacore-release', ':crashreportlib-release', ':userfeedback-release'

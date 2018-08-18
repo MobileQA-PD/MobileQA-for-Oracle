@@ -13,24 +13,24 @@
 		89C6D924207E003D000D123F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89C6D923207E003D000D123F /* Assets.xcassets */; };
 		89C6D927207E003D000D123F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89C6D925207E003D000D123F /* LaunchScreen.storyboard */; };
 		89C6D92A207E003D000D123F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6D929207E003D000D123F /* main.m */; };
-		89C6D933207E007D000D123F /* CrashReportLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6D930207E007D000D123F /* CrashReportLib.framework */; };
-		89C6D934207E007D000D123F /* CrashReportLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6D930207E007D000D123F /* CrashReportLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		89C6D935207E007D000D123F /* MqaCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6D931207E007D000D123F /* MqaCore.framework */; };
-		89C6D936207E007D000D123F /* MqaCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6D931207E007D000D123F /* MqaCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		89C6D937207E007D000D123F /* UserFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6D932207E007D000D123F /* UserFeedback.framework */; };
-		89C6D938207E007D000D123F /* UserFeedback.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6D932207E007D000D123F /* UserFeedback.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		89D33FB321269A4400F61567 /* CrashReport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D33FAE21269A3700F61567 /* CrashReport.framework */; };
+		89D33FB421269A4400F61567 /* CrashReport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 89D33FAE21269A3700F61567 /* CrashReport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		89D33FB521269A4400F61567 /* OcamCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D33FAF21269A3700F61567 /* OcamCore.framework */; };
+		89D33FB621269A4400F61567 /* OcamCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 89D33FAF21269A3700F61567 /* OcamCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		89D33FB721269A4400F61567 /* UserFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D33FAD21269A3700F61567 /* UserFeedback.framework */; };
+		89D33FB821269A4400F61567 /* UserFeedback.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 89D33FAD21269A3700F61567 /* UserFeedback.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		89C6D939207E007D000D123F /* Embed Frameworks */ = {
+		89D33FA62126991400F61567 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				89C6D934207E007D000D123F /* CrashReportLib.framework in Embed Frameworks */,
-				89C6D936207E007D000D123F /* MqaCore.framework in Embed Frameworks */,
-				89C6D938207E007D000D123F /* UserFeedback.framework in Embed Frameworks */,
+				89D33FB421269A4400F61567 /* CrashReport.framework in Embed Frameworks */,
+				89D33FB621269A4400F61567 /* OcamCore.framework in Embed Frameworks */,
+				89D33FB821269A4400F61567 /* UserFeedback.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,9 +48,9 @@
 		89C6D926207E003D000D123F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6D928207E003D000D123F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89C6D929207E003D000D123F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		89C6D930207E007D000D123F /* CrashReportLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReportLib.framework; sourceTree = "<group>"; };
-		89C6D931207E007D000D123F /* MqaCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MqaCore.framework; sourceTree = "<group>"; };
-		89C6D932207E007D000D123F /* UserFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UserFeedback.framework; sourceTree = "<group>"; };
+		89D33FAD21269A3700F61567 /* UserFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UserFeedback.framework; sourceTree = "<group>"; };
+		89D33FAE21269A3700F61567 /* CrashReport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReport.framework; sourceTree = "<group>"; };
+		89D33FAF21269A3700F61567 /* OcamCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OcamCore.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89C6D933207E007D000D123F /* CrashReportLib.framework in Frameworks */,
-				89C6D935207E007D000D123F /* MqaCore.framework in Frameworks */,
-				89C6D937207E007D000D123F /* UserFeedback.framework in Frameworks */,
+				89D33FB721269A4400F61567 /* UserFeedback.framework in Frameworks */,
+				89D33FB321269A4400F61567 /* CrashReport.framework in Frameworks */,
+				89D33FB521269A4400F61567 /* OcamCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,9 +70,9 @@
 		89C6D90E207E003B000D123F = {
 			isa = PBXGroup;
 			children = (
-				89C6D930207E007D000D123F /* CrashReportLib.framework */,
-				89C6D931207E007D000D123F /* MqaCore.framework */,
-				89C6D932207E007D000D123F /* UserFeedback.framework */,
+				89D33FAE21269A3700F61567 /* CrashReport.framework */,
+				89D33FAF21269A3700F61567 /* OcamCore.framework */,
+				89D33FAD21269A3700F61567 /* UserFeedback.framework */,
 				89C6D919207E003B000D123F /* SDKSample */,
 				89C6D918207E003B000D123F /* Products */,
 			);
@@ -112,7 +112,7 @@
 				89C6D913207E003B000D123F /* Sources */,
 				89C6D914207E003B000D123F /* Frameworks */,
 				89C6D915207E003B000D123F /* Resources */,
-				89C6D939207E007D000D123F /* Embed Frameworks */,
+				89D33FA62126991400F61567 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

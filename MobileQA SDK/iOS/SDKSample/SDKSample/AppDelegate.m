@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import <CrashReportLib/CrashReport.h>
 #import <UserFeedback/UserFeedback.h>
+#import <CrashReport/CrashReport.h>
 
 @interface AppDelegate ()
 
@@ -20,11 +20,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    // Initialize Crash Report
-    [CrashReport setCrashReport: @"** user_id **"];
-    // Initialize User Feedback
-    [UserFeedback setFeedback: @"** user_id **"];
-        
+    [CrashReport setCrashReport: @"--oracle cloud id (email)--"];
+    [UserFeedback setFeedback: @"--oracle cloud id (email)--"];
+    
     return YES;
 }
 

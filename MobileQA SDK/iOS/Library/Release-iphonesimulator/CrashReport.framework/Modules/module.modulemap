@@ -1,0 +1,6 @@
+framework module CrashReport {
+  umbrella header "CrashReport.h"
+
+  export *
+  module * { export * }
+}

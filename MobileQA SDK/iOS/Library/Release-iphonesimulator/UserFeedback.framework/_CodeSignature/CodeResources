@@ -4,25 +4,13 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Feedback.storyboardc/FeedbackViewController.nib</key>
-		<data>
-		eQbdv1QKjBZsu99Uyny5NLwbv1E=
-		</data>
-		<key>Feedback.storyboardc/GrJ-IF-5ND-view-uk7-EV-2YC.nib</key>
-		<data>
-		Dyuj1G4LCvW1Fs04Uh1ImUVqCR0=
-		</data>
-		<key>Feedback.storyboardc/Info.plist</key>
-		<data>
-		maErBQchPZvdTR8eFsq8/zSydBM=
-		</data>
 		<key>Headers/UserFeedback.h</key>
 		<data>
-		AF6GVpQJnhDU8yAzQa1mCBPqloE=
+		7wQ6VaXeFr6u936O5AJzjSRcp6U=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Dd9gnttQo8QSuVRF02EYVsKtE0U=
+		dFfxpDd/FpRcJCUOAmQJ1s26ZHw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -31,48 +19,15 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Feedback.storyboardc/FeedbackViewController.nib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			eQbdv1QKjBZsu99Uyny5NLwbv1E=
-			</data>
-			<key>hash2</key>
-			<data>
-			fgcAGjXHOdDDQ2wIUrHt43wNHa4kNgDmv/LQAjolks8=
-			</data>
-		</dict>
-		<key>Feedback.storyboardc/GrJ-IF-5ND-view-uk7-EV-2YC.nib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Dyuj1G4LCvW1Fs04Uh1ImUVqCR0=
-			</data>
-			<key>hash2</key>
-			<data>
-			ir4sx1E79TI91LIB24eazoUZxwguJgpGd7DWMNBR60A=
-			</data>
-		</dict>
-		<key>Feedback.storyboardc/Info.plist</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			maErBQchPZvdTR8eFsq8/zSydBM=
-			</data>
-			<key>hash2</key>
-			<data>
-			iXCcuGeSsH+LkgxxSVCPlsW3JT61ti7iUzgFpRo0qwQ=
-			</data>
-		</dict>
 		<key>Headers/UserFeedback.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			AF6GVpQJnhDU8yAzQa1mCBPqloE=
+			7wQ6VaXeFr6u936O5AJzjSRcp6U=
 			</data>
 			<key>hash2</key>
 			<data>
-			TjhfRKOGG2VOuNYGBab3Zd7U+QXBzZjfJUlfFGKZXoQ=
+			mRF+GRsrZj8IUvPE+HGV5sJhybS2ozc8vQhh3ueiL+c=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
