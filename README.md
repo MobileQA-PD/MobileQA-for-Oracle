@@ -6,7 +6,10 @@ OCAM for Oracle Cloud
 
 App의 Crash 정보를 OCAM service로 전송
 
+
 ## iOS
+
+#### 기본 설정
 
 1. libMqaCore.a 와 libCrashReport.a 를 프로젝트에 import
 2. AppDelegate.h 에 Crash 발생 감시 설정
@@ -29,7 +32,11 @@ App의 Crash 정보를 OCAM service로 전송
 }
 ~~~
 
+
+
 ## Android
+
+#### 기본 설정
 
 1. mqacore-xxx.aar 과 crashreportlib-xxx.aar 을 프로젝트에 import
 2. MainActivity.java 에 Crash 발생 감시 설정
@@ -48,7 +55,61 @@ import kr.peopledream.mqa.crashreportlib.CrashReport;
       ...
 
     }
+~~~
 
+
+#### Custom Data 설정 API (Option)
+
+crash가 발생하여 정보가 ocam service로 전송될 때 추가로 전송하고자 하는 data를 설정
+
+~~~~
+static
+putCustom(String key, String value)
+~~~~
+* Crash 발생시 추가로 전송하고자 하는 정보를 등록 및 수정
+* 앱 실행중 언제든 사용 가능하다.
+* Parameters
+    - key : key string
+    - value : value string
+
+~~~~
+static
+removeCustom(String key, String value)
+~~~~
+* 기 입력된 custom 정보를 삭제
+* 앱 실행중 언제든 사용 가능하다.
+* Parameters
+    - key : key string
+
+
+#### 사용자 Crash 전송 (Option)
+디버깅 목적 등의 용도로,  인위적으로 crash 정보를 생성하여 서버로 전송
+
+callback interface
+~~~
+public interface CompletionCallback {
+  void onSendComplete(int resultCode, String response);
+}
+~~~
+
+API
+~~~~
+static
+postCustomCrash(final String title, final String description, final CompletionCallback callback)
+~~~~
+* Parameters
+    - title : custom crash 등록 제목
+    - description : custom crash 본문
+    - callback : 전송 완료 callback
+
+Example
+~~~
+CrashReport.postCustomCrash("Custom Crash Title", "Custom Crash Description", new CrashReport.CompletionCallback() {
+                    @Override
+                    public void onSendComplete(int resultCode, String response) {
+                        Log.d("MainActivity","SEND CUSTOM CRASH COMPLETE :" + resultCode + "   " + response);
+                    }
+                });
 ~~~
 
 
