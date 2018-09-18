@@ -6,7 +6,7 @@ OCAM for Oracle Cloud
 
 App의 Crash 정보를 서버로 전달
 
-## iOS 적용
+## iOS
 
 1. libMqaCore.a 와 libCrashReport.a 를 프로젝트에 import
 2. AppDelegate.h 에 Crash 발생 감시 설정
@@ -29,7 +29,7 @@ App의 Crash 정보를 서버로 전달
 }
 ~~~
 
-## Android 적용
+## Android
 
 1. mqacore-xxx.aar 과 crashreportlib-xxx.aar 을 프로젝트에 import
 2. MainActivity.java 에 Crash 발생 감시 설정
@@ -52,8 +52,11 @@ import kr.peopledream.mqa.crashreportlib.CrashReport;
 ~~~
 
 
-### User Feedback
+# User Feedback
 
+App 내에서 user의 feedback을 사용자 환경과 함께 ocam service 로 전송
+
+## iOS
 
 1. libMqaCore.a 와 libUserFeedback.a 를 프로젝트에 import
 2. AppDelegate.h 에 UserFeedback 기능 설정
@@ -89,9 +92,9 @@ import kr.peopledream.mqa.crashreportlib.CrashReport;
 
 
 
-## Android 적용
+## Android
 
-1. mqacore-xxx.aar 과 crashreportlib-xxx.aar 을 프로젝트에 import
+1. mqacore-xxx.aar 과 userfeedback-xxx.aar 을 프로젝트에 import
 2. MainActivity.java 에 UserFeedback 기능 설정
 3. 필요한 곳에서 User Feedback 호출
 
