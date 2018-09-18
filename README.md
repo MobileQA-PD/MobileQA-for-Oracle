@@ -4,7 +4,7 @@ OCAM for Oracle Cloud
 
 # Crash Repor
 
-App의 Crash 정보를 서버로 전달
+App의 Crash 정보를 OCAM service로 전송
 
 ## iOS
 
