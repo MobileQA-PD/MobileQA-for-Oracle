@@ -1,6 +1,6 @@
-OCAM for Oracle Cloud
-=====================
-
+OCAM for Oracle Cloud Service
+=============================
+iOS, Android native SDK
 
 # Crash Report
 
