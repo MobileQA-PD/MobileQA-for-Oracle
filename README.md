@@ -2,7 +2,7 @@ OCAM for Oracle Cloud
 =====================
 
 
-# Crash Repor
+# Crash Report
 
 App의 Crash 정보를 OCAM service로 전송
 
@@ -32,7 +32,50 @@ App의 Crash 정보를 OCAM service로 전송
 }
 ~~~
 
+#### Custom Data 설정 API (Option)
 
+crash가 발생하여 정보가 ocam service로 전송될 때 추가로 전송하고자 하는 data를 설정
+
+~~~~
++ (void) putCustom : (NSString *)value  ForKey:(NSString *)forKey
+~~~~
+* Crash 발생시 추가로 전송하고자 하는 정보를 등록 및 수정
+* 앱 실행중 언제든 사용 가능하다.
+* Parameters
+    - value : value string
+    - key : key string
+
+~~~~
++ (void)removeCustom : (NSString *)key
+~~~~
+* 기 입력된 custom 정보를 삭제
+* 앱 실행중 언제든 사용 가능하다.
+* Parameters
+    - key : key string
+
+
+#### 사용자 Crash 전송 (Option)
+디버깅 목적 등의 용도로,  인위적으로 crash 정보를 생성하여 서버로 전송
+
+API
+~~~~
++ (void) postCustomCrash:(NSString *)title
+              Descrition:(NSString *)description
+        CompletionHander:(void (^)(int response, NSString *description))completionHandler;
+~~~~
+* Parameters
+    - title : custom crash 등록 제목
+    - description : custom crash 본문
+    - completionHandler : 전송 완료 callback
+
+Example
+~~~
+    [CrashReport postCustomCrash:@"Custom Crash iOS"
+                      Descrition:@"Custom Crash Description"
+                CompletionHander:^(int response, NSString *description) {
+                    NSLog(@"RESPONSE (%d)", response);
+                }];
+~~~
 
 ## Android
 
@@ -117,7 +160,10 @@ CrashReport.postCustomCrash("Custom Crash Title", "Custom Crash Description", ne
 
 App 내에서 user의 feedback을 사용자 환경과 함께 ocam service 로 전송
 
+
 ## iOS
+
+#### 기본 설정
 
 1. libMqaCore.a 와 libUserFeedback.a 를 프로젝트에 import
 2. AppDelegate.h 에 UserFeedback 기능 설정
@@ -147,13 +193,20 @@ App 내에서 user의 feedback을 사용자 환경과 함께 ocam service 로 �
 - (IBAction)onClickShowFeedback:(id)sender {
     [UserFeedback showFeedback];
 }
-
-
 ~~~
 
 
+#### Custom Data 설정 API (Option)
+~~~
++ (void) putCustom : (NSString *)value  ForKey:(NSString *)forKey;
++ (void) removeCustom : (NSString *)key;
+~~~
+세부 내역은 Crash 부분과 동일
+
 
 ## Android
+
+#### 기본 설정
 
 1. mqacore-xxx.aar 과 userfeedback-xxx.aar 을 프로젝트에 import
 2. MainActivity.java 에 UserFeedback 기능 설정
@@ -188,3 +241,9 @@ import kr.peopledream.mqa.userfeedback.UserFeedback;
 
 ~~~
 
+#### Custom Data 설정 API (Option)
+~~~
+public static void putCustom(String key, String value) 
+public static void removeCustom(String key)
+~~~
+세부 내역은 Crash 부분과 동일
