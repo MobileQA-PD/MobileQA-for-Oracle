@@ -1,9 +1,6 @@
 OCAM for Oracle Cloud Service
 =============================
 
-주요 기능 소개
------------
-
 
 ## Crash Management
 
@@ -35,6 +32,8 @@ OCAM for Oracle Cloud Service
 - Web Site 및 Web App
 - Feature
 
+### Feature
+
 * User Feedback 화면 Full Customizable
 * 자동 Screen Capture
 * 수집된 Crash 정보를 Issue Management 로 전송 가능
@@ -56,7 +55,7 @@ Desktop 및 Mobile 환경 지원
 <br>
 <br>
 
-iOS, Android native SDK
+iOS, Android Native SDK
 =======================
 
 # Crash Report
