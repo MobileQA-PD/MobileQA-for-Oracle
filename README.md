@@ -20,11 +20,11 @@ OCAM for Oracle Cloud Service
 * App Crash 정보 및 운영 환경 정보 전송 (os, version, device, memory, cpu사용량)
 * 전송 오류 보정 - 전송 오류 발생시 다음 실행 단계에 발송
 * 실시간 Crash 수집 pause 및 resume 제어
-* *rash 발생 시 User Feedback (Screen Capture 포함) 입력화면 노출 Option 제공
-* *rash User Feedback 노출 옵션 실시간 제공
-* *집된 Crash 정보를 Issue Management 로 전송 가능
-* *ustom crash 전송
-* *rash 데이터 전송시 사용자 지정 data 전송
+* crash 발생 시 User Feedback (Screen Capture 포함) 입력화면 노출 Option 제공
+* crash User Feedback 노출 옵션 실시간 제공
+* 수집된 Crash 정보를 Issue Management 로 전송 가능
+* custom crash 전송
+* crash 데이터 전송시 사용자 지정 data 전송
 
 ## User Feedback
 
