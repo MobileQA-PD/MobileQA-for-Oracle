@@ -1,6 +1,63 @@
 OCAM for Oracle Cloud Service
 =============================
+
+주요 기능 소개
+-----------
+
+
+## Crash Management
+
+### Support platform
+
+- Android Native App
+- iOS Native App
+- Web Site 및 Web App (javascript)
+- Web (serveside)
+- Android, iOS SDK 및 Document
+
+### Feature
+
+* App Crash 정보 및 운영 환경 정보 전송 (os, version, device, memory, cpu사용량)
+* 전송 오류 보정 - 전송 오류 발생시 다음 실행 단계에 발송
+* 실시간 Crash 수집 pause 및 resume 제어
+* *rash 발생 시 User Feedback (Screen Capture 포함) 입력화면 노출 Option 제공
+* *rash User Feedback 노출 옵션 실시간 제공
+* *집된 Crash 정보를 Issue Management 로 전송 가능
+* *ustom crash 전송
+* *rash 데이터 전송시 사용자 지정 data 전송
+
+## User Feedback
+
+### Support platform
+
+- Android Native App
+- iOS Native App
+- Web Site 및 Web App
+- Feature
+
+* User Feedback 화면 Full Customizable
+* 자동 Screen Capture
+* 수집된 Crash 정보를 Issue Management 로 전송 가능
+
+
+## Issue Management
+
+Oracle Development Cloud 의 Issue 시스템과 연동  
+통합 App을 통하여 간편하게 Issue 관리  
+OCAM의 Crash Management와 User Feedback에서 제공된 데이터를 구분하여 관리  
+
+
+## OCAM Manager
+
+OCAM에서 지원하는 모든 기능을 모니터링, 조회, 관리할 수 있는 앱 제공 
+Desktop 및 Mobile 환경 지원
+
+<br>
+<br>
+<br>
+
 iOS, Android native SDK
+=======================
 
 # Crash Report
 
